@@ -231,3 +231,6 @@ def generate_query_thought_examples(out_path = './examples_query_thought.txt', t
     f = open(out_path , 'w')
     f.write(str(response.text))
     f.close()
+if __name__ == "__main__":
+    generate_query_thought_examples()
+
