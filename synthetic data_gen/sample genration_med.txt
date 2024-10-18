@@ -1,0 +1,802 @@
+```json
+'Example: Query: What is the latest lab test result for patient John Smith? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for John Smith.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: Schedule an appointment for patient Jane Doe with Dr. Miller on 2024-03-15 at 10:00 AM '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Jane Doe.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to get the provider ID for Dr. Miller.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the query 'Dr. Miller' to retrieve the provider ID."
+    },
+    {
+        "thought": "Finally, we need to schedule the appointment using the retrieved patient and provider IDs and the specified appointment date and time.",
+        "tool_name": "schedule_appointment",
+        "task": "Use the schedule_appointment tool with the patient ID, provider ID, and appointment date and time '2024-03-15 10:00 AM'."
+    }
+]
+</Solution>'
+
+'Example: Query: List medications prescribed to patient Alex Johnson '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Alex Johnson.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: Recommend a treatment plan for patient Emily Carter who is experiencing fever, cough, and headache '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Emily Carter.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to recommend a treatment plan based on the patient's symptoms.",
+        "tool_name": "recommend_treatment_plan",
+        "task": "Use the recommend_treatment_plan tool with the patient ID and the list of symptoms: ['fever', 'cough', 'headache']."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a CBC and a urinalysis test for patient David Wilson '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for David Wilson.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the CBC and urinalysis tests for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the list of test IDs: ['CBC', 'urinalysis']."
+    }
+]
+</Solution>'
+
+'Example: Query: Find similar cases to patient Sarah Brown's diagnosis of pneumonia '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'pneumonia'."
+    }
+]
+</Solution>'
+
+'Example: Query: What is the patient's medical history related to allergies? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Sarah Brown.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to allergies.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'allergies'."
+    }
+]
+</Solution>'
+
+'Example: Query: Generate a health report for patient Michael Lee '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Michael Lee.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to generate a health report based on the patient's medical data.",
+        "tool_name": "generate_health_report",
+        "task": "Use the generate_health_report tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: What is the patient's medication history? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to medications.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'medications'."
+    }
+]
+</Solution>'
+
+'Example: Query: What is the patient's latest blood pressure reading? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    },
+    {
+        "thought": "Finally, we need to extract the blood pressure reading from the lab results.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'blood pressure' to retrieve the blood pressure reading."
+    }
+]
+</Solution>'
+
+'Example: Query: When was the patient last admitted to the hospital? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to hospital admissions.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'hospital admission' to retrieve the admission dates."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's allergies? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to allergies.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'allergies' to retrieve the allergy information."
+    }
+]
+</Solution>'
+
+'Example: Query:  Schedule a check-up for patient Mary Jones with her primary care physician on 2024-04-01 '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Mary Jones.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to get the provider ID for her primary care physician.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'primary care physician' to retrieve the provider ID."
+    },
+    {
+        "thought": "Finally, we need to schedule the appointment using the retrieved patient and provider IDs and the specified appointment date.",
+        "tool_name": "schedule_appointment",
+        "task": "Use the schedule_appointment tool with the patient ID, provider ID, and appointment date '2024-04-01'."
+    }
+]
+</Solution>'
+
+'Example: Query: List all medications prescribed to patient Robert Smith '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Robert Smith.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a blood sugar test and a cholesterol test for patient Susan Miller '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Susan Miller.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the blood sugar and cholesterol tests for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the list of test IDs: ['blood sugar', 'cholesterol']."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you tell me about similar cases to patient William Jones's diagnosis of diabetes? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'diabetes'."
+    }
+]
+</Solution>'
+
+'Example: Query:  What are the patient's latest lab results? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: When was the patient's last appointment? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to appointments.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'appointment' to retrieve the appointment dates."
+    }
+]
+</Solution>'
+
+'Example: Query: Is the patient taking any medications? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's current symptoms? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to symptoms.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'symptoms' to retrieve the symptom information."
+    }
+]
+</Solution>'
+
+'Example: Query: What is the patient's current diagnosis? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to diagnoses.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'diagnosis' to retrieve the diagnosis information."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you recommend a treatment plan for patient Christopher Brown who is experiencing dizziness, fatigue, and nausea? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Christopher Brown.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to recommend a treatment plan based on the patient's symptoms.",
+        "tool_name": "recommend_treatment_plan",
+        "task": "Use the recommend_treatment_plan tool with the patient ID and the list of symptoms: ['dizziness', 'fatigue', 'nausea']."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a complete blood count (CBC) test for patient Jessica Davis '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Jessica Davis.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the CBC test for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the test ID: ['CBC']."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you find similar cases to patient  Daniel Wilson's diagnosis of asthma? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'asthma'."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's vitals for the last appointment? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to the last appointment.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'last appointment' to retrieve the appointment date."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to vitals.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'vitals' to retrieve the vital information."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you schedule an appointment for patient  Jennifer Smith with Dr. Brown for a check-up on 2024-05-01? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Jennifer Smith.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to get the provider ID for Dr. Brown.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the query 'Dr. Brown' to retrieve the provider ID."
+    },
+    {
+        "thought": "Finally, we need to schedule the appointment using the retrieved patient and provider IDs and the specified appointment date.",
+        "tool_name": "schedule_appointment",
+        "task": "Use the schedule_appointment tool with the patient ID, provider ID, and appointment date '2024-05-01'."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's prescribed medications? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you order a urinalysis test for patient David Lee? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for David Lee.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the urinalysis test for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the test ID: ['urinalysis']."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's most recent blood test results? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: When was the patient's last physical? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to physicals.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'physical' to retrieve the physical dates."
+    }
+]
+</Solution>'
+
+'Example: Query: Is the patient currently taking any antibiotics? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    },
+    {
+        "thought": "Next, we need to search the medication list for any antibiotics.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'antibiotics' to retrieve the antibiotic information."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's current health concerns? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to health concerns.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'health concerns' to retrieve the health concern information."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you recommend a treatment plan for patient  Ashley Jones who is experiencing a fever, cough, and sore throat? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Ashley Jones.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to recommend a treatment plan based on the patient's symptoms.",
+        "tool_name": "recommend_treatment_plan",
+        "task": "Use the recommend_treatment_plan tool with the patient ID and the list of symptoms: ['fever', 'cough', 'sore throat']."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a thyroid panel test for patient  Brian Smith '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Brian Smith.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the thyroid panel test for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the test ID: ['thyroid panel']."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you find similar cases to patient  Karen Davis's diagnosis of high blood pressure? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'high blood pressure'."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's last three blood sugar readings? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: When was the patient last seen by a specialist? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to specialist appointments.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'specialist appointment' to retrieve the appointment dates."
+    }
+]
+</Solution>'
+
+'Example: Query: Is the patient currently taking any pain medication? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    },
+    {
+        "thought": "Next, we need to search the medication list for any pain medication.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'pain medication' to retrieve the pain medication information."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's current health conditions? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to health conditions.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'health conditions' to retrieve the health condition information."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you recommend a treatment plan for patient  Ashley Jones who is experiencing a fever, cough, and sore throat? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Ashley Jones.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to recommend a treatment plan based on the patient's symptoms.",
+        "tool_name": "recommend_treatment_plan",
+        "task": "Use the recommend_treatment_plan tool with the patient ID and the list of symptoms: ['fever', 'cough', 'sore throat']."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a thyroid panel test for patient  Brian Smith '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Brian Smith.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the thyroid panel test for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the test ID: ['thyroid panel']."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you find similar cases to patient  Karen Davis's diagnosis of high blood pressure? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'high blood pressure'."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's last three blood sugar readings? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to retrieve the latest lab results for the patient.",
+        "tool_name": "get_latest_lab_results",
+        "task": "Use the get_latest_lab_results tool with the patient ID retrieved in the previous step."
+    }
+]
+</Solution>'
+
+'Example: Query: When was the patient last seen by a specialist? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to specialist appointments.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'specialist appointment' to retrieve the appointment dates."
+    }
+]
+</Solution>'
+
+'Example: Query: Is the patient currently taking any pain medication? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to list the medications prescribed to the patient.",
+        "tool_name": "list_medications",
+        "task": "Use the list_medications tool with the patient ID retrieved in the previous step."
+    },
+    {
+        "thought": "Next, we need to search the medication list for any pain medication.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'pain medication' to retrieve the pain medication information."
+    }
+]
+</Solution>'
+
+'Example: Query: What are the patient's current health conditions? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for the patient.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to search the medical records for information related to health conditions.",
+        "tool_name": "search_medical_record",
+        "task": "Use the search_medical_record tool with the patient ID and the query 'health conditions' to retrieve the health condition information."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you recommend a treatment plan for patient  Michael Johnson who is experiencing a headache, nausea, and vomiting? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Michael Johnson.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to recommend a treatment plan based on the patient's symptoms.",
+        "tool_name": "recommend_treatment_plan",
+        "task": "Use the recommend_treatment_plan tool with the patient ID and the list of symptoms: ['headache', 'nausea', 'vomiting']."
+    }
+]
+</Solution>'
+
+'Example: Query: Order a liver function test for patient  Sarah Miller '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Sarah Miller.",
+        "tool_name": "get_patient_id",
+        "task": "Use the get_patient_id tool to retrieve the patient ID."
+    },
+    {
+        "thought": "Next, we need to order the liver function test for the patient.",
+        "tool_name": "order_lab_tests",
+        "task": "Use the order_lab_tests tool with the patient ID and the test ID: ['liver function']."
+    }
+]
+</Solution>'
+
+'Example: Query: Can you find similar cases to patient  David Jones's diagnosis of high cholesterol? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to find similar medical cases based on the patient's diagnosis.",
+        "tool_name": "get_similar_cases",
+        "task": "Use the get_similar_cases tool with the diagnosis 'high cholesterol'."
+    }
+]
+</Solution>'
+
+'Example: Query:  Can you schedule an appointment for patient  Mary Brown with Dr. Smith for a check-up on 2024-06-01? '
+'<Solution>
+[
+    {
+        "thought": "First, we need to get the patient ID for Mary Brown.",
+        "tool_name": "get_patient_id",
+        "
