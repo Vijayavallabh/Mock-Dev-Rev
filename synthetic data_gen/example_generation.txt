@@ -1,0 +1,288 @@
+Sure, here are 20 query solution pairs using the provided tools:
+
+### Example 1
+**Query:** Find all high-priority tasks for the part 'ENH-876'.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tasks that apply to the part 'ENH-876' and have a high priority.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'applies_to_part' = ['ENH-876'], 'issue_priority' = ['high'], and 'type' = ['task']."
+    },
+    {
+        "thought": "Next, we need to prioritize the tasks retrieved from the previous step.",
+        "tool_name": "prioritize_objects",
+        "task": "Use the prioritize_objects tool with the argument 'objects' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 2
+**Query:** List all work items created by 'DEVU-234' and 'DEVU-235' that are tasks.
+```<Solution>
+[
+    {
+        "thought": "First, we need to list all tasks created by the users 'DEVU-234' and 'DEVU-235'.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'created_by' = ['DEVU-234', 'DEVU-235'] and 'type' = ['task']."
+    }
+]
+</Solution>```
+
+### Example 3
+**Query:** Get the current sprint ID and add 'TASK-987' to it.
+```<Solution>
+[
+    {
+        "thought": "First, we need to get the current sprint ID.",
+        "tool_name": "get_sprint_id",
+        "task": "Use the get_sprint_id tool to obtain the current sprint ID."
+    },
+    {
+        "thought": "Next, we need to add the work item 'TASK-987' to the current sprint.",
+        "tool_name": "add_work_items_to_sprint",
+        "task": "Use the add_work_items_to_sprint tool with the arguments: 'work_ids' = ['TASK-987'] and 'sprint_id' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 4
+**Query:** Find issues related to 'FEAT-678' in the 'Development' stage.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all issues related to the feature 'FEAT-678' that are in the 'Development' stage.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'applies_to_part' = ['FEAT-678'], 'stage_name' = ['Development'], and 'type' = ['issue']."
+    }
+]
+</Solution>```
+
+### Example 5
+**Query:** Summarize all high-severity tickets from 'Sales' channel.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all high-severity tickets that originate from the 'Sales' channel.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'ticket_source_channel' = ['Sales'], 'ticket_severity' = ['high'], and 'type' = ['ticket']."
+    },
+    {
+        "thought": "Next, we need to summarize the tickets obtained from the previous step.",
+        "tool_name": "summarize_objects",
+        "task": "Use the summarize_objects tool with the argument 'objects' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 6
+**Query:** Prioritize work items owned by 'DEVU-456' with priority 'high'.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all work items owned by 'DEVU-456' with a high priority.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'owned_by' = ['DEVU-456'], 'issue_priority' = ['high']."
+    },
+    {
+        "thought": "Next, we need to prioritize the work items retrieved from the previous step.",
+        "tool_name": "prioritize_objects",
+        "task": "Use the prioritize_objects tool with the argument 'objects' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 7
+**Query:** List all tickets with 'medium' severity that are not yet responded to.
+```<Solution>
+[
+    {
+        "thought": "First, we need to list all tickets with a medium severity that require a response.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'ticket_severity' = ['medium'], 'ticket_need_response' = true, and 'type' = ['ticket']."
+    }
+]
+</Solution>```
+
+### Example 8
+**Query:** Fetch all tasks for the part 'ENH-998' and summarize them.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tasks that apply to the part 'ENH-998'.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the argument 'applies_to_part' = ['ENH-998']."
+    },
+    {
+        "thought": "Next, we need to summarize the tasks obtained from the previous step.",
+        "tool_name": "summarize_objects",
+        "task": "Use the summarize_objects tool with the argument 'objects' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 9
+**Query:** List all issues in 'QA Review' with 'high' severity.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all issues that are currently in the 'QA Review' stage with a high severity.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'stage_name' = ['QA Review'], 'ticket_severity' = ['high'], and 'type' = ['issue']."
+    }
+]
+</Solution>```
+
+### Example 10
+**Query:** Find tasks assigned to 'DEVU-123' that need a response.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tasks assigned to the user 'DEVU-123' that require a response.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'owned_by' = ['DEVU-123'], 'ticket_need_response' = true, and 'type' = ['task']."
+    }
+]
+</Solution>```
+
+### Example 11
+**Query:** Get the current user ID and list their high-priority tasks.
+```<Solution>
+[
+    {
+        "thought": "First, we need to identify the current user using the who_am_i tool.",
+        "tool_name": "who_am_i",
+        "task": "Use the who_am_i tool to get the current user's ID."
+    },
+    {
+        "thought": "Next, we need to list all high-priority tasks created by this user.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'created_by' = '$$PREV[0]', 'issue_priority' = ['high'], and 'type' = ['task']."
+    }
+]
+</Solution>```
+
+### Example 12
+**Query:** Fetch all 'bug' issues with 'low' severity.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all issues categorized as 'bug' with a low severity.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'type' = ['bug'], 'ticket_severity' = ['low'], and 'type' = ['issue']."
+    }
+]
+</Solution>```
+
+### Example 13
+**Query:** Prioritize work items that have not been responded to.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all work items that have not been responded to.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the argument 'ticket_need_response' = true."
+    },
+    {
+        "thought": "Next, we need to prioritize the work items retrieved from the previous step.",
+        "tool_name": "prioritize_objects",
+        "task": "Use the prioritize_objects tool with the argument 'objects' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 14
+**Query:** List all tickets in the 'Support' channel with 'high' severity.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tickets that originate from the 'Support' channel with a high severity.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'ticket_source_channel' = ['Support'], 'ticket_severity' = ['high'], and 'type' = ['ticket']."
+    }
+]
+</Solution>```
+
+### Example 15
+**Query:** Find all 'task' items related to 'PROJ-123' with 'high' priority.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tasks that are related to the project 'PROJ-123' with a high priority.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'applies_to_part' = ['PROJ-123'], 'issue_priority' = ['high'], and 'type' = ['task']."
+    }
+]
+</Solution>```
+
+### Example 16
+**Query:** Get the current sprint ID and add 'ISSUE-876' to it.
+```<Solution>
+[
+    {
+        "thought": "First, we need to get the current sprint ID.",
+        "tool_name": "get_sprint_id",
+        "task": "Use the get_sprint_id tool to obtain the current sprint ID."
+    },
+    {
+        "thought": "Next, we need to add the work item 'ISSUE-876' to the current sprint.",
+        "tool_name": "add_work_items_to_sprint",
+        "task": "Use the add_work_items_to_sprint tool with the arguments: 'work_ids' = ['ISSUE-876'] and 'sprint_id' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 17
+**Query:** List all work items in 'Development' stage with 'high' priority.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all work items that are currently in the 'Development' stage with a high priority.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'stage_name' = ['Development'], 'issue_priority' = ['high']."
+    }
+]
+</Solution>```
+
+### Example 18
+**Query:** Find all tasks related to 'FEAT-789' with 'medium' severity.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tasks that are related to the feature 'FEAT-789' with a medium severity.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'applies_to_part' = ['FEAT-789'], 'ticket_severity' = ['medium'], and 'type' = ['task']."
+    }
+]
+</Solution>```
+
+### Example 19
+**Query:** Get the current user ID and assign 'ISSUE-987' to them.
+```<Solution>
+[
+    {
+        "thought": "First, we need to identify the current user using the who_am_i tool.",
+        "tool_name": "who_am_i",
+        "task": "Use the who_am_i tool to get the current user's ID."
+    },
+    {
+        "thought": "Next, we need to assign the work item 'ISSUE-987' to the current user.",
+        "tool_name": "assign_work_items",
+        "task": "Use the assign_work_items tool with the arguments: 'work_item_ids' = ['ISSUE-987'] and 'user_id' = '$$PREV[0]'."
+    }
+]
+</Solution>```
+
+### Example 20
+**Query:** List all tickets with 'low' severity in 'Testing' stage.
+```<Solution>
+[
+    {
+        "thought": "First, we need to retrieve all tickets that are currently in the 'Testing' stage with a low severity.",
+        "tool_name": "works_list",
+        "task": "Use the works_list tool with the arguments: 'stage_name' = ['Testing'], 'ticket_severity' = ['low'], and 'type' = ['ticket']."
+    }
+]
+</Solution>```
+
+These examples should provide a good range of query solutions using the specified tools.
