@@ -19,18 +19,23 @@ def extract_solution(text):
 
 
 def extract_tools(data, thoughts):
-    thoughts = json.loads(thoughts)
-    tool_names = [item["tool_name"] for item in thoughts if "tool_name" in item]
-    tools = []
-    print(tool_names)
-    #     print(tool_names)
-    for tool in tool_names:
-        #         print(tool)
-        matching_tools = [tool1 for tool1 in data if tool1['tool_name'] == tool]
-        print(matching_tools)
-        tools.append(matching_tools[0])
-    return tools
-
+    if thoughts:
+        thoughts = json.loads(thoughts)
+        tool_names = [item["tool_name"] for item in thoughts if "tool_name" in item]
+        tools = []
+        print(tool_names)
+        #     print(tool_names)
+        for tool in tool_names:
+            #         print(tool)
+            matching_tools = [tool1 for tool1 in data if tool1['tool_name'] == tool]
+            print(matching_tools)
+            if matching_tools:
+                tools.append(matching_tools[0])
+            else:
+                tools = []
+        return tools
+    else:
+        return []
 
 # Create a directed graph
 
