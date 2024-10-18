@@ -31,12 +31,17 @@ def extract_tools(data, thoughts):
         tools.append(matching_tools[0])
     return tools
 
+
+# Create a directed graph
+
 def create_graph(data):
     G = nx.DiGraph()
-
-    # Add tools to the graph
+    # Add tools to the graph    
     for tool in data:
-        inp = tool['args'][0]['arg_type'] if len(tool['args']) > 0 else None
+        try:
+            inp = tool['args'][0]['arg_type']
+        except:
+            inp = None   
         G.add_node(tool['tool_name'], input_type=inp, output_type=tool['output']['arg_type'])
 
     for tool_a in data:
@@ -49,14 +54,22 @@ def create_graph(data):
                         G.add_edge(tool_a['tool_name'], tool_b['tool_name'], weight=weight)
     return G
 
-def generate_embeddings(descriptions, model, t='cosine'):
+    
+def generate_embeddings(descriptions, model, t='cosine', add_tools=False, pre_index=None):
     sentences = descriptions
     embeddings = model.encode(sentences)
 
     if (t == 'cosine'):
         embeddings = embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True)  # Normalize the embeddings
     embedding_dimension = embeddings.shape[1]
-    index = faiss.IndexFlatIP(embedding_dimension)  # Use cosine similarity
+    if(add_tools):
+        index = pre_index
+    else:
+        if (t=='cosine'):
+            index = faiss.IndexFlatIP(embedding_dimension)
+        else:
+            index = faiss.IndexFlatL2(embedding_dimension) 
+
     index.add(embeddings)
     return index
 
@@ -83,18 +96,27 @@ def calculate_r_values(G, tools, relevance_dict, gamma):
     r_values = relevance_dict
 
     for tool in tools:
+        # Check if the tool exists in the graph before proceeding
+        if tool not in G.nodes:
+            continue
+
         queue = deque([(tool, 0, 0)])  # Track each tool with its level (depth)
 
         while queue:
             current_tool, level, cur_w = queue.popleft()
 
             for ancestor in G.predecessors(current_tool):
-                #                 print(ancestor)
                 if ancestor not in r_values:
                     edge_data = G.get_edge_data(ancestor, current_tool)
-                    weight = edge_data['weight']
+        
 
-                    t = level + 1  # Ancestor is one level higher than current tool
+                    # Check if 'weight' exists in the edge data
+                    if 'weight' in edge_data:
+                        weight = edge_data['weight']
+                    else:
+                        continue  # Skip if no weight is found
+
+                    t = level + 1  # Ancestor is one level higher than the current tool
 
                     # Apply annealing factor gamma^t to the weight
                     annealed_weight = weight * (gamma ** t) + cur_w
@@ -103,8 +125,7 @@ def calculate_r_values(G, tools, relevance_dict, gamma):
                         r_value = relevance_dict[current_tool] * annealed_weight
                         r_values[ancestor] = r_value
 
-                    # Add ancestor to the queue with incremented level
+                    # Add ancestor to the queue with an incremented level
                     queue.append((ancestor, t, r_value))
 
     return r_values
-
