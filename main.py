@@ -103,8 +103,7 @@ if uploaded_file is not None:
             # query_embedding = sen_transform_model.encode([query], convert_to_tensor=True).cpu().numpy()
             # selected_indices = mmr(query_embedding, document_embeddings, k=3, lambda_param=0.2)
             # retrieved_documents = [examples_list[i] for i in selected_indices]
-            # relevant_examples = '\n'.join(retrieved_documents)
-            # # print("Retrieved Documents:", '\n'.join(retrieved_documents))
+            # example = '\n'.join(retrieved_documents)
 
 
 
