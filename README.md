@@ -9,7 +9,3 @@ Follow the instructions to run our code -
 Optional - 
 While using the code on a new toolset a query-solution pair needs to be generated and validated by a human. Run the 'Example_Datagen.py' and make the suitable changes to include the new examples in both prompts for a better solution.( Uncomment the code snippet in main.py) 
 
-Precautions - 
-The code might sometimes give a JSONDecode error.
-
-Kindly contact 9823965807 - Hrushikesh Kant for any queries in the code as well as errors while running the code.
